@@ -35,6 +35,7 @@ describe('server responses', () => {
         }
       }
       test(input);
+      console.log(input);
 
       expect(res._responseCode).to.equal(200);
       expect(res._ended).to.equal(true);
