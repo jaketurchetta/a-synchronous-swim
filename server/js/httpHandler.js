@@ -31,5 +31,4 @@ module.exports.router = (req, res, next = ()=>{}) => {
     res.end(generateRandomMove());
     next(); // invoke next() at the end of a request to help with testing!
   }
-
 };

@@ -1,3 +1,4 @@
+
 (function() {
 
   const serverUrl = 'http://127.0.0.1:3000';
@@ -9,11 +10,19 @@
     $.ajax({
       type: 'GET',
       url: serverUrl,
-      data: '',
-
-      success: (command) => (SwimTeam.move(command))
+      data: {command: command},
+      success: (command) => {
+          SwimTeam.move(command)
+        }
+      // error: () => {
+      //   console.log('Error: command not received')
+      // }
     })
   }
+  setInterval(() => {
+    fetchSwimCommand();
+    console.log('I\'m getting a command')
+  }, 3000);
 
 
   /////////////////////////////////////////////////////////////////////
