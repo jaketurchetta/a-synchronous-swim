@@ -13,8 +13,18 @@ module.exports.initialize = (queue) => {
 };
 
 module.exports.router = (req, res, next = ()=>{}) => {
-  console.log('Serving request type ' + req.method + ' for url ' + req.url);
-  res.writeHead(200, headers);
-  res.end();
-  next(); // invoke next() at the end of a request to help with testing!
+  // update to handle different types of reqs (req.method)
+  if (req.method === 'OPTIONS') {
+    console.log('Serving request type ' + req.method + ' for url ' + req.url);
+    res.writeHead(200, headers);
+    res.end();
+    next(); // invoke next() at the end of a request to help with testing!
+  } else if (req.method === 'GET') {
+    console.log('Serving request type ' + req.method + ' for url ' + req.url);
+    res.writeHead(200, headers);
+    res.send('right');
+    res.end('right');
+    next(); // invoke next() at the end of a request to help with testing!
+  }
+
 };

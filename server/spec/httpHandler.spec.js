@@ -12,7 +12,7 @@ describe('server responses', () => {
 
   it('should respond to a OPTIONS request', (done) => {
     let {req, res} = server.mock('/', 'OPTIONS');
-
+    console.log(req,res);
     httpHandler.router(req, res);
     expect(res._responseCode).to.equal(200);
     expect(res._ended).to.equal(true);
@@ -23,7 +23,22 @@ describe('server responses', () => {
 
   it('should respond to a GET request for a swim command', (done) => {
     // write your test here
-    done();
+    let {req, res} = server.mock('/test', 'GET');
+    var input = res._data.toString();
+    console.log(res._data.toString());
+    var flag = false;
+    const test = function(input) {
+      if (input === 'left' || input === 'right' || input === 'up' || input === 'down') {
+        flag = true;
+      }
+    }
+    test(input);
+    httpHandler.router(req, res, () => {
+      expect(res._responseCode).to.equal(200);
+      expect(res._ended).to.equal(true);
+      expect(flag).to.equal(true);
+      done();
+    })
   });
 
   xit('should respond with 404 to a GET request for a missing background image', (done) => {
