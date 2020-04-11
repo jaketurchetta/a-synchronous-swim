@@ -9,6 +9,8 @@
     $.ajax({
       type: 'GET',
       url: serverUrl,
+      data: '',
+
       success: (command) => (SwimTeam.move(command))
     })
   }

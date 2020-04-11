@@ -23,17 +23,19 @@ describe('server responses', () => {
 
   it('should respond to a GET request for a swim command', (done) => {
     // write your test here
-    let {req, res} = server.mock('/test', 'GET');
-    var input = res._data.toString();
-    console.log(res._data.toString());
-    var flag = false;
-    const test = function(input) {
-      if (input === 'left' || input === 'right' || input === 'up' || input === 'down') {
-        flag = true;
-      }
-    }
-    test(input);
+    let {req, res} = server.mock('/', 'GET');
     httpHandler.router(req, res, () => {
+
+      var input = res._data.toString();
+      console.log(res._data.toString());
+      var flag = false;
+      const test = function(input) {
+        if (input === 'left' || input === 'right' || input === 'up' || input === 'down') {
+          flag = true;
+        }
+      }
+      test(input);
+
       expect(res._responseCode).to.equal(200);
       expect(res._ended).to.equal(true);
       expect(flag).to.equal(true);

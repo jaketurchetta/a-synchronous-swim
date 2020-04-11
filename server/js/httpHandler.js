@@ -7,6 +7,12 @@ const multipart = require('./multipartUtils');
 module.exports.backgroundImageFile = path.join('.', 'background.jpg');
 ////////////////////////////////////////////////////////
 
+const generateRandomMove = () => {
+  let options = ['left', 'right', 'up', 'down'];
+  let randomInt = Math.floor(Math.random() * 4);
+  return options[randomInt];
+}
+
 let messageQueue = null;
 module.exports.initialize = (queue) => {
   messageQueue = queue;
@@ -22,8 +28,7 @@ module.exports.router = (req, res, next = ()=>{}) => {
   } else if (req.method === 'GET') {
     console.log('Serving request type ' + req.method + ' for url ' + req.url);
     res.writeHead(200, headers);
-    res.send('right');
-    res.end('right');
+    res.end(generateRandomMove());
     next(); // invoke next() at the end of a request to help with testing!
   }
 
